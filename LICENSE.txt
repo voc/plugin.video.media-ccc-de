@@ -20,3 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+------------------------------------------------------------------------------
+
+The image fanart.jpg is (c) 2013 Alain, and licenced under CC-BY 2.0, which
+can be found under https://creativecommons.org/licenses/by/2.0/
+
+(Taken from https://www.flickr.com/photos/notalain/11644470323)
