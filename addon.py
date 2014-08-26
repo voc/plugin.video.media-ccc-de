@@ -52,8 +52,9 @@ def show_conference(conf):
     for event in data:
         items.append({
             'label': event['title'],
+            'thumbnail': event['thumb_url'],
             'info': {
-#                'date':
+                'duration': str_length(event['length']),
                 'cast': event['persons'],
                 'plot': event['description'],
                 'tagline': event['subtitle']
@@ -103,6 +104,10 @@ def format_priority(entry):
         return 2
     else:
         return 99
+
+def str_length(length):
+    mins, secs = divmod(length, 60)
+    return '%0i:%02i' % (mins, secs)
 
 if __name__ == '__main__':
     plugin.run()
