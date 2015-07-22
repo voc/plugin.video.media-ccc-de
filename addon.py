@@ -58,12 +58,16 @@ def show_conference(conf):
             'label': event['title'],
             'thumbnail': event['thumb_url'],
             'info': {
-                'duration': str_length(event['length']),
                 'cast': event['persons'],
                 'plot': event['description'],
                 'tagline': event['subtitle']
+            },
+            'stream_info': {
+                'video': {
+                    'duration': event['length']
                 },
-                'path': plugin.url_for('resolve_event_default', event = event['url'].rsplit('/', 1)[1]),
+            },
+            'path': plugin.url_for('resolve_event_default', event = event['url'].rsplit('/', 1)[1]),
             'is_playable': True
             })
     return sorted(items, key=operator.itemgetter('label'))
@@ -103,10 +107,6 @@ def build_path(top, down):
         return down
     else:
         return '/'.join((top, down))
-
-def str_length(length):
-    mins, secs = divmod(length, 60)
-    return '%0i:%02i' % (mins, secs)
 
 if __name__ == '__main__':
     plugin.run()
