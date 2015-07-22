@@ -78,7 +78,9 @@ def resolve_event(event, quality = None, format = None):
 
     req = requests.get(BASE_URL + 'events/' + event)
     want = recording_list(req.json()['recordings'], quality, format)
+
     if len(want) > 0:
+        requests.post(BASE_URL + 'recordings/count', data = {'event_id': event, 'src': want[0].url})
         plugin.set_resolved_url(want[0].url)
 
 @plugin.cached()
