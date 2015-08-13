@@ -117,12 +117,26 @@ def show_live():
     for room in data.rooms:
         want = room.streams_sorted(quality, format)
 
-        if len(want) > 0:
+        try:
+            item = next(x for x in want if x.translated == False)
             items.append({
                 'label': room.display,
                 'is_playable': True,
-                'path': want[0].url
+                'path': item.url
             })
+        except StopIteration:
+            pass
+
+        try:
+            item = next(x for x in want if x.translated == True)
+            items.append({
+                'label': room.display + ' (Translated)',
+                'is_playable': True,
+                'path': item.url
+            })
+        except StopIteration:
+            pass
+
     return items
 
 

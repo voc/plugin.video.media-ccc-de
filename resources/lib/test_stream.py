@@ -19,7 +19,7 @@ def test_streams():
     preferred = streams[0]
     assert preferred.hd == True
     assert preferred.format == 'mp4'
-    assert preferred.isTranslated == False
+    assert preferred.translated == False
 
 SampleJson = simplejson.loads('''
 [
