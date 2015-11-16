@@ -1,18 +1,11 @@
 from __future__ import print_function
 
 import operator
-import requests
 
 from xbmcswift2 import Plugin
 
 from resources.lib.helpers import recording_list
-from resources.lib.stream import Streams
-
-BASE_URL = 'https://api.media.ccc.de/public/'
-LIVE_URL = 'http://streaming.media.ccc.de/streams/v1.json'
-
-#BASE_URL = 'http://127.0.0.1:3000/public/'
-#LIVE_URL = 'http://127.0.0.1:3000/v1.json'
+import resources.lib.http as http
 
 plugin = Plugin()
 
@@ -22,7 +15,11 @@ FORMATS = ["mp4", "webm"]
 @plugin.route('/', name='index')
 @plugin.route('/dir/<subdir>')
 def show_dir(subdir = ''):
-    data = get_index_data()
+    try:
+        data = get_index_data()
+    except http.FetchError:
+        return
+
     items = []
     subdirs = set()
     if subdir == '':
@@ -62,8 +59,12 @@ def show_dir(subdir = ''):
 
 @plugin.route('/conference/<conf>')
 def show_conference(conf):
-    req = requests.get(BASE_URL + 'conferences/' + conf)
-    data = req.json()['events']
+    data = None
+    try:
+        data = http.fetch_data('conferences/' + conf)['events']
+    except http.FetchError:
+        return
+
     items = []
     for event in data:
         items.append({
@@ -92,11 +93,15 @@ def resolve_event(event, quality = None, format = None):
     if format not in FORMATS:
         format = FORMATS[plugin.get_setting('format', int)]
 
-    req = requests.get(BASE_URL + 'events/' + event)
-    want = recording_list(req.json()['recordings'], quality, format)
+    data = None
+    try:
+        data = http.fetch_data('events/' + event)['recordings']
+    except http.FetchError:
+        return
+    want = recording_list(data, quality, format)
 
     if len(want) > 0:
-        requests.post(BASE_URL + 'recordings/count', data = {'event_id': event, 'src': want[0].url})
+        http.count_view(event, want[0].url)
         plugin.set_resolved_url(want[0].url)
 
 @plugin.route('/live')
@@ -104,8 +109,11 @@ def show_live():
     quality = QUALITY[plugin.get_setting('quality', int)]
     format = FORMATS[plugin.get_setting('format', int)]
 
-    req = requests.get(LIVE_URL)
-    data = Streams(req.json())
+    data = None
+    try:
+        data = http.fetch_live()
+    except http.FetchError:
+        return
 
     if len(data.rooms) == 0:
         return [{
@@ -142,8 +150,7 @@ def show_live():
 
 @plugin.cached()
 def get_index_data():
-    req = requests.get(BASE_URL + 'conferences')
-    return req.json()['conferences']
+    return http.fetch_data('conferences')['conferences']
 
 def split_pathname(name, depth):
     path = name.split('/')
