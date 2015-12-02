@@ -1,6 +1,6 @@
 import requests
 
-from xbmcswift2 import xbmcgui
+import xbmcgui
 
 from .stream import Streams
 

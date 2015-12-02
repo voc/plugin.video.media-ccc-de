@@ -2,17 +2,19 @@ from __future__ import print_function
 
 import operator
 
-from xbmcswift2 import Plugin
+import routing
+from xbmcgui import ListItem
+from xbmcplugin import addDirectoryItem, endOfDirectory, setResolvedUrl, getSetting
 
 from resources.lib.helpers import recording_list
 import resources.lib.http as http
 
-plugin = Plugin()
+plugin = routing.Plugin()
 
 QUALITY = ["sd", "hd"]
 FORMATS = ["mp4", "webm"]
 
-@plugin.route('/', name='index')
+@plugin.route('/')
 @plugin.route('/dir/<subdir>')
 def show_dir(subdir = ''):
     try:
@@ -20,42 +22,33 @@ def show_dir(subdir = ''):
     except http.FetchError:
         return
 
-    items = []
     subdirs = set()
     if subdir == '':
         depth = 0
+
+        addDirectoryItem(plugin.handle, plugin.url_for(show_live), ListItem('Live Streaming'), True)
     else:
         depth = len(subdir.split('/'))
 
 
-    for event in data:
+    for event in sorted(data, key=operator.itemgetter('title')):
         top, down, children = split_pathname(event['webgen_location'], depth)
 
         if top != subdir or down in subdirs:
             continue
         if children:
-            items.append({
-                'label': down.title(),
-                'path': plugin.url_for('show_dir', subdir = build_path(top, down))
-            })
+            addDirectoryItem(plugin.handle, plugin.url_for(show_dir, subdir = build_path(top, down)),
+                    ListItem(down.title()), True)
             subdirs.add(down)
         else:
-            items.append({
-                'label': event['title'],
-                'label2': event['acronym'],
-                'thumbnail': event['logo_url'],
-                'path': plugin.url_for('show_conference', conf = event['url'].rsplit('/', 1)[1])
-            })
+            item = ListItem(event['title'])
+            item.setLabel2(event['acronym'])
+            item.setThumbnailImage(event['logo_url'])
+            addDirectoryItem(plugin.handle, plugin.url_for(show_conference, conf = event['url'].rsplit('/', 1)[1]),
+                    item, True)
 
-    items.sort(key=operator.itemgetter('label'))
+    endOfDirectory(plugin.handle)
 
-    if depth == 0:
-        items.insert(0, {
-            'label': 'Live Streaming',
-            'path': plugin.url_for('show_live')
-        })
-
-    return items
 
 @plugin.route('/conference/<conf>')
 def show_conference(conf):
@@ -65,33 +58,30 @@ def show_conference(conf):
     except http.FetchError:
         return
 
-    items = []
-    for event in data:
-        items.append({
-            'label': event['title'],
-            'thumbnail': event['thumb_url'],
-            'info': {
-                'cast': event['persons'],
-                'plot': event['description'],
-                'tagline': event['subtitle']
-            },
-            'stream_info': {
-                'video': {
-                    'duration': event['length']
-                },
-            },
-            'path': plugin.url_for('resolve_event_default', event = event['url'].rsplit('/', 1)[1]),
-            'is_playable': True
-            })
-    return sorted(items, key=operator.itemgetter('label'))
+    for event in sorted(data, key=operator.itemgetter('title')):
+        item = ListItem(event['title'])
+        item.setThumbnailImage(event['thumb_url'])
+        item.setProperty('IsPlayable', 'true')
+        item.setInfo('video', {
+            'cast': event['persons'],
+            'plot': event['description'],
+            'tagline': event['subtitle']
+        })
+        item.addStreamInfo('video', {
+            'duration': event['length']
+        })
 
-@plugin.route('/event/<event>', name = 'resolve_event_default')
+        addDirectoryItem(plugin.handle, plugin.url_for(resolve_event, event = event['url'].rsplit('/', 1)[1]),
+                item, False)
+    endOfDirectory(plugin.handle)
+
+@plugin.route('/event/<event>')
 @plugin.route('/event/<event>/<quality>/<format>')
 def resolve_event(event, quality = None, format = None):
     if quality not in QUALITY:
-        quality = QUALITY[plugin.get_setting('quality', int)]
+        quality = get_set_quality()
     if format not in FORMATS:
-        format = FORMATS[plugin.get_setting('format', int)]
+        format = get_set_format()
 
     data = None
     try:
@@ -102,12 +92,12 @@ def resolve_event(event, quality = None, format = None):
 
     if len(want) > 0:
         http.count_view(event, want[0].url)
-        plugin.set_resolved_url(want[0].url)
+        setResolvedUrl(plugin.handle, True, ListItem(path=want[0].url))
 
 @plugin.route('/live')
 def show_live():
-    quality = QUALITY[plugin.get_setting('quality', int)]
-    format = FORMATS[plugin.get_setting('format', int)]
+    quality = get_set_quality()
+    format = get_set_format()
 
     data = None
     try:
@@ -116,39 +106,32 @@ def show_live():
         return
 
     if len(data.rooms) == 0:
-        return [{
-            'label': 'No live event currently, go watch some recordings!',
-            'path': plugin.url_for('index')
-        }]
+        addDirectoryItem(plugin.handle, plugin.url_for(show_dir),
+                ListItem('No live event currently, go watch some recordings!'), True)
 
-    items = []
     for room in data.rooms:
         want = room.streams_sorted(quality, format)
 
         try:
-            item = next(x for x in want if x.translated == False)
-            items.append({
-                'label': room.display,
-                'is_playable': True,
-                'path': item.url
-            })
+            first_native = next(x for x in want if x.translated == False)
+            item = ListItem(room.display)
+            item.setProperty('IsPlayable', 'true')
+            addDirectoryItem(plugin.handle, first_native.url, item, False)
         except StopIteration:
             pass
 
         try:
-            item = next(x for x in want if x.translated == True)
-            items.append({
-                'label': room.display + ' (Translated)',
-                'is_playable': True,
-                'path': item.url
-            })
+            first_trans = next(x for x in want if x.translated == True)
+            item = ListItem(room.display + ' (Translated)')
+            item.setProperty('IsPlayable', 'true')
+            addDirectoryItem(plugin.handle, first_trans.url, item, False)
         except StopIteration:
             pass
 
-    return items
+    endOfDirectory(plugin.handle)
 
 
-@plugin.cached()
+# FIXME: @plugin.cached()
 def get_index_data():
     return http.fetch_data('conferences')['conferences']
 
@@ -167,6 +150,18 @@ def build_path(top, down):
         return down
     else:
         return '/'.join((top, down))
+
+def get_setting_int(name):
+    val = getSetting(plugin.handle, name)
+    if not val:
+        val = '0'
+    return int(val)
+
+def get_set_quality():
+    return QUALITY[get_setting_int('quality')]
+
+def get_set_format():
+    return FORMATS[get_setting_int('format')]
 
 if __name__ == '__main__':
     plugin.run()
