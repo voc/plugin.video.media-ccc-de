@@ -11,14 +11,18 @@ class Recording(object):
     def __init__(self, json):
         self.mime = json['display_mime_type']
         self.format = self.mime.split('/')[1]
-        self.orig_mime = json['display_mime_type']
         self.hd = json['hd']
         self.url = json['recording_url']
         self.length = json['length']
         self.size = json['size']
+        lang = json['language']
+        if lang:
+            self.languages = lang.split('-')
+        else:
+            self.languages = ('unk',)
 
     def __repr__(self):
-        return repr((self.mime, self.hd))
+        return repr((self.mime, self.hd, self.languages))
 
     def is_video(self):
         return self.mime.startswith('video/')
@@ -40,14 +44,14 @@ def user_preference_sorter(prefer_quality, prefer_format):
         elif obj.hd == False and prefer_quality == "hd":
             prio += 10
 
-        # "web" versions are missing one audio track
+        # Prefer versions with "more" audio tracks
         try:
-            if obj.orig_mime.endswith('-web'):
-                prio -= 5
+            translations = len(obj.languages) - 1
+            prio -= translations
         except AttributeError:
             pass
 
-        # Prefer "native" over "translated" for now...
+        # Prefer "native" over "translated" for now (streaming)...
         try:
             if obj.translated:
                 prio -= 5
