@@ -15,7 +15,7 @@ QUALITY = ["sd", "hd"]
 FORMATS = ["mp4", "webm"]
 
 @plugin.route('/')
-@plugin.route('/dir/<subdir>')
+@plugin.route('/dir/<path:subdir>')
 def show_dir(subdir = ''):
     try:
         data = get_index_data()
