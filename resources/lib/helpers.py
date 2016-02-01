@@ -9,7 +9,7 @@ def recording_list(json, quality, format):
 
 class Recording(object):
     def __init__(self, json):
-        self.mime = json['display_mime_type']
+        self.mime = json['mime_type']
         self.format = self.mime.split('/')[1]
         self.orig_mime = json['mime_type']
         self.hd = json['hd']
