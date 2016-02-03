@@ -9,9 +9,8 @@ def recording_list(json, quality, format):
 
 class Recording(object):
     def __init__(self, json):
-        self.mime = json['display_mime_type']
-        self.format = self.mime.split('/')[1]
-        self.orig_mime = json['mime_type']
+        self.mime = json['mime_type']
+        self.type, self.format = self.mime.split('/')
         self.hd = json['hd']
         self.url = json['recording_url']
         self.length = json['length']
@@ -23,10 +22,13 @@ class Recording(object):
             self.languages = ('unk',)
 
     def __repr__(self):
-        return "Recording<F:%s,M:%s,HD:%s,LANG:%s>" % (self.format, self.orig_mime, self.hd, self.languages)
+        return "Recording<M:%s,HD:%s,LANG:%s>" % (self.mime, self.hd, self.languages)
 
     def is_video(self):
-        return self.mime.startswith('video/')
+        return self.type == 'video'
+
+    def is_audio(self):
+        return self.type == 'audio'
 
 def user_preference_sorter(prefer_quality, prefer_format):
     def do_sort(obj):
@@ -44,14 +46,6 @@ def user_preference_sorter(prefer_quality, prefer_format):
             prio -= 10
         elif obj.hd == False and prefer_quality == "hd":
             prio -= 10
-
-        # "web" versions are missing one audio track
-        # (legacy, but not all conferences have proper language tags yet)
-        try:
-            if obj.orig_mime.endswith('-web'):
-                prio -= 5
-        except AttributeError:
-            pass
 
         # Prefer versions with "more" audio tracks
         try:
