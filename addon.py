@@ -13,9 +13,10 @@ plugin = routing.Plugin()
 QUALITY = ["sd", "hd"]
 FORMATS = ["mp4", "webm"]
 
+
 @plugin.route('/')
 @plugin.route('/dir/<path:subdir>')
-def show_dir(subdir = ''):
+def show_dir(subdir=''):
     try:
         data = get_index_data()
     except http.FetchError:
@@ -25,10 +26,10 @@ def show_dir(subdir = ''):
     if subdir == '':
         depth = 0
 
-        addDirectoryItem(plugin.handle, plugin.url_for(show_live), ListItem('Live Streaming'), True)
+        addDirectoryItem(plugin.handle, plugin.url_for(show_live),
+                         ListItem('Live Streaming'), True)
     else:
         depth = len(subdir.split('/'))
-
 
     for event in sorted(data, key=operator.itemgetter('title')):
         top, down, children = split_pathname(event['webgen_location'], depth)
@@ -36,15 +37,17 @@ def show_dir(subdir = ''):
         if top != subdir or down in subdirs:
             continue
         if children:
-            addDirectoryItem(plugin.handle, plugin.url_for(show_dir, subdir = build_path(top, down)),
-                    ListItem(down.title()), True)
+            addDirectoryItem(plugin.handle, plugin.url_for(show_dir,
+                             subdir=build_path(top, down)),
+                             ListItem(down.title()), True)
             subdirs.add(down)
         else:
             item = ListItem(event['title'])
             item.setLabel2(event['acronym'])
             item.setThumbnailImage(event['logo_url'])
-            addDirectoryItem(plugin.handle, plugin.url_for(show_conference, conf = event['url'].rsplit('/', 1)[1]),
-                    item, True)
+            url = plugin.url_for(show_conference,
+                                 conf=event['url'].rsplit('/', 1)[1])
+            addDirectoryItem(plugin.handle, url, item, True)
 
     endOfDirectory(plugin.handle)
 
@@ -70,13 +73,15 @@ def show_conference(conf):
             'duration': event['length']
         })
 
-        addDirectoryItem(plugin.handle, plugin.url_for(resolve_event, event = event['url'].rsplit('/', 1)[1]),
-                item, False)
+        url = plugin.url_for(resolve_event,
+                             event=event['url'].rsplit('/', 1)[1])
+        addDirectoryItem(plugin.handle, url, item, False)
     endOfDirectory(plugin.handle)
+
 
 @plugin.route('/event/<event>')
 @plugin.route('/event/<event>/<quality>/<format>')
-def resolve_event(event, quality = None, format = None):
+def resolve_event(event, quality=None, format=None):
     if quality not in QUALITY:
         quality = get_set_quality()
     if format not in FORMATS:
@@ -93,6 +98,7 @@ def resolve_event(event, quality = None, format = None):
         http.count_view(event, want[0].url)
         setResolvedUrl(plugin.handle, True, ListItem(path=want[0].url))
 
+
 @plugin.route('/live')
 def show_live():
     quality = get_set_quality()
@@ -105,14 +111,14 @@ def show_live():
         return
 
     if len(data.rooms) == 0:
-        addDirectoryItem(plugin.handle, plugin.url_for(show_dir),
-                ListItem('No live event currently, go watch some recordings!'), True)
+        entry = ListItem('No live event currently, go watch some recordings!')
+        addDirectoryItem(plugin.handle, plugin.url_for(show_dir), entry, True)
 
     for room in data.rooms:
         want = room.streams_sorted(quality, format)
 
         try:
-            first_native = next(x for x in want if x.translated == False)
+            first_native = next(x for x in want if x.translated is False)
             item = ListItem(room.display)
             item.setProperty('IsPlayable', 'true')
             addDirectoryItem(plugin.handle, first_native.url, item, False)
@@ -120,7 +126,7 @@ def show_live():
             pass
 
         try:
-            first_trans = next(x for x in want if x.translated == True)
+            first_trans = next(x for x in want if x.translated is True)
             item = ListItem(room.display + ' (Translated)')
             item.setProperty('IsPlayable', 'true')
             addDirectoryItem(plugin.handle, first_trans.url, item, False)
@@ -134,6 +140,7 @@ def show_live():
 def get_index_data():
     return http.fetch_data('conferences')['conferences']
 
+
 def split_pathname(name, depth):
     path = name.split('/')
     top = '/'.join(path[0:depth])
@@ -144,11 +151,13 @@ def split_pathname(name, depth):
     children = len(path)-1 > depth
     return (top, down, children)
 
+
 def build_path(top, down):
     if top == '':
         return down
     else:
         return '/'.join((top, down))
+
 
 def get_setting_int(name):
     val = getSetting(plugin.handle, name)
@@ -156,11 +165,14 @@ def get_setting_int(name):
         val = '0'
     return int(val)
 
+
 def get_set_quality():
     return QUALITY[get_setting_int('quality')]
 
+
 def get_set_format():
     return FORMATS[get_setting_int('format')]
+
 
 if __name__ == '__main__':
     plugin.run()

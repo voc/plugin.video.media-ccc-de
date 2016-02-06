@@ -9,13 +9,13 @@ def user_preference_sorter(prefer_quality, prefer_format):
             prio += 20
 
         # Bonus & penalty for exact matches, no score for "obj.hd == None"
-        if obj.hd == True and prefer_quality == "hd":
+        if obj.hd is True and prefer_quality == "hd":
             prio += 20
-        elif obj.hd == False and prefer_quality == "sd":
+        elif obj.hd is False and prefer_quality == "sd":
             prio += 20
-        elif obj.hd == True and prefer_quality == "sd":
+        elif obj.hd is True and prefer_quality == "sd":
             prio -= 10
-        elif obj.hd == False and prefer_quality == "hd":
+        elif obj.hd is False and prefer_quality == "hd":
             prio -= 10
 
         # Prefer versions with "more" audio tracks
