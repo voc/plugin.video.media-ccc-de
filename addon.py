@@ -6,7 +6,6 @@ import routing
 from xbmcgui import ListItem
 from xbmcplugin import addDirectoryItem, endOfDirectory, setResolvedUrl, getSetting
 
-from resources.lib.helpers import recording_list
 import resources.lib.http as http
 
 plugin = routing.Plugin()
@@ -85,10 +84,10 @@ def resolve_event(event, quality = None, format = None):
 
     data = None
     try:
-        data = http.fetch_data('events/' + event)['recordings']
+        data = http.fetch_recordings(event)
     except http.FetchError:
         return
-    want = recording_list(data, quality, format)
+    want = data.recordings_sorted(quality, format)
 
     if len(want) > 0:
         http.count_view(event, want[0].url)

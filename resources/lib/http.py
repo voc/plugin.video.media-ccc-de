@@ -3,6 +3,7 @@ import requests
 import xbmcgui
 
 from .stream import Streams
+from .recording import Recordings
 
 BASE_URL = 'https://api.media.ccc.de/public/'
 LIVE_URL = 'https://streaming.media.ccc.de/streams/v1.json'
@@ -26,6 +27,12 @@ def count_view(event, src):
         requests.post(BASE_URL + 'recordings/count', data = {'event_id': event, 'src': src})
     except requests.RequestException as e:
         xbmcgui.Dialog().notification('CCC-TV', 'Can\'t count view: %s' % e, xbmcgui.NOTIFICATION_INFO, 15000)
+
+
+def fetch_recordings(event):
+    req = fetch_data('events/' + event)
+    return Recordings(req)
+
 
 def fetch_live():
     try:

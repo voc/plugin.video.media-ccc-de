@@ -1,34 +1,5 @@
 from __future__ import print_function
 
-def recording_list(json, quality, format):
-    recs = [Recording(elem) for elem in json]
-    print("Requested quality %s and format %s" % (quality, format))
-    want = sorted(filter(lambda rec: rec.is_video(), recs), key = user_preference_sorter(quality, format))
-    print(want)
-    return want
-
-class Recording(object):
-    def __init__(self, json):
-        self.mime = json['mime_type']
-        self.type, self.format = self.mime.split('/')
-        self.hd = json['hd']
-        self.url = json['recording_url']
-        self.length = json['length']
-        self.size = json['size']
-        lang = json['language']
-        if lang:
-            self.languages = lang.split('-')
-        else:
-            self.languages = ('unk',)
-
-    def __repr__(self):
-        return "Recording<M:%s,HD:%s,LANG:%s>" % (self.mime, self.hd, self.languages)
-
-    def is_video(self):
-        return self.type == 'video'
-
-    def is_audio(self):
-        return self.type == 'audio'
 
 def user_preference_sorter(prefer_quality, prefer_format):
     def do_sort(obj):
