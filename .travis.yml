@@ -6,6 +6,9 @@ python:
   - "pypy"
   - "pypy3"
 sudo: false
+# command to install dependencies
+install:
+  - pip install simplejson
 # command to run tests
 script: py.test
 notifications:
