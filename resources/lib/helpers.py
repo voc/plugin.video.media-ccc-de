@@ -35,8 +35,32 @@ def user_preference_sorter(prefer_quality, prefer_format):
         return -prio
     return do_sort
 
+
 def maybe_json(json, attr, default):
     try:
         return json[attr]
-    except KeyError as e:
+    except KeyError:
         return default
+
+
+def json_date_to_info(json, field, info):
+    if field not in json or not json[field] or len(json[field]) < 10:
+        return
+
+    try:
+        y, m, d = [int(x) for x in json[field][0:10].split('-')]
+        info['date'] = "%02d.%02d.%04d" % (d, m, y)
+        info['year'] = y
+        info['aired'] = "%04d-%02d-%02d" % (y, m, d)
+        info['dateadded'] = "%04d-%02d-%02d" % (y, m, d)
+    except ValueError:
+        return
+
+
+def calc_aspect(s):
+    try:
+        aspect = [float(x) for x in s.split(':')]
+        if len(aspect) == 2:
+            return aspect[0]/aspect[1]
+    except ValueError:
+        return None

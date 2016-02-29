@@ -4,9 +4,10 @@ import operator
 
 import routing
 from xbmcgui import ListItem
-from xbmcplugin import addDirectoryItem, endOfDirectory, setResolvedUrl, getSetting
+from xbmcplugin import addDirectoryItem, endOfDirectory, setResolvedUrl, getSetting, setContent
 
 import resources.lib.http as http
+from resources.lib.helpers import maybe_json, calc_aspect, json_date_to_info
 
 plugin = routing.Plugin()
 
@@ -56,22 +57,36 @@ def show_dir(subdir=''):
 def show_conference(conf):
     data = None
     try:
-        data = http.fetch_data('conferences/' + conf)['events']
+        data = http.fetch_data('conferences/' + conf)
     except http.FetchError:
         return
 
-    for event in sorted(data, key=operator.itemgetter('title')):
+    setContent(plugin.handle, 'movies')
+
+    aspect = calc_aspect(maybe_json(data, 'aspect_ratio', '16:9'))
+
+    for event in sorted(data['events'], key=operator.itemgetter('title')):
         item = ListItem(event['title'])
         item.setThumbnailImage(event['thumb_url'])
         item.setProperty('IsPlayable', 'true')
-        item.setInfo('video', {
-            'cast': event['persons'],
-            'plot': event['description'],
-            'tagline': event['subtitle']
-        })
-        item.addStreamInfo('video', {
-            'duration': event['length']
-        })
+
+        info = {
+            'cast': maybe_json(event, 'persons', []),
+            'credits': ", ".join(maybe_json(event, 'persons', [])),
+            'genre': " / ".join(maybe_json(event, 'tags', [])),
+            'plot': maybe_json(event, 'description', ''),
+            'tagline': maybe_json(event, 'subtitle', '')
+        }
+        json_date_to_info(event, 'date', info)
+        item.setInfo('video', info)
+
+        streamInfo = {}
+        length = maybe_json(event, 'length', 0)
+        if length > 0:
+            streamInfo['duration'] = length
+        if aspect:
+            streamInfo['aspect'] = aspect
+        item.addStreamInfo('video', streamInfo)
 
         url = plugin.url_for(resolve_event,
                              event=event['url'].rsplit('/', 1)[1])
