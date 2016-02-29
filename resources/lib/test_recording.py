@@ -15,6 +15,16 @@ def test_recordings():
     assert preferred.format == 'mp4'
     assert len(preferred.languages) == 2
 
+def test_minimal_broken_json():
+    r = Recordings(MinimalBrokenJson)
+    assert len(r.recordings) == 2
+    recordings = r.recordings_sorted("hd", "mp4")
+    assert len(recordings) == 2
+    preferred = recordings[0]
+    assert preferred.hd is True
+    assert preferred.format == 'mp4'
+    assert len(preferred.languages) == 1
+
 # From https://api.media.ccc.de/public/events/2893
 SampleJson = simplejson.loads('''
 {
@@ -212,5 +222,19 @@ SampleJson = simplejson.loads('''
   "title": "De-anonymizing Programmers",
   "updated_at": "2016-02-06T00:02:27.744+01:00",
   "url": "https://api.media.ccc.de/public/events/2893"
+}
+''')
+
+MinimalBrokenJson = simplejson.loads('''
+{
+  "recordings": [
+    {
+      "recording_url": "http://cdn.media.ccc.de/congress/2015/h264-hd-web/32c3-7491-de-De-anonymizing_Programmers.mp4"
+    },
+    {
+      "recording_url": "http://cdn.media.ccc.de/congress/2015/h264-hd/32c3-7491-en-de-De-anonymizing_Programmers_hd.mp4"
+    }
+  ],
+  "title": "De-anonymizing Programmers"
 }
 ''')

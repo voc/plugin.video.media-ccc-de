@@ -34,3 +34,9 @@ def user_preference_sorter(prefer_quality, prefer_format):
 
         return -prio
     return do_sort
+
+def maybe_json(json, attr, default):
+    try:
+        return json[attr]
+    except KeyError as e:
+        return default

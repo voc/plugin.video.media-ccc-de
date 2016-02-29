@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from .helpers import user_preference_sorter
+from .helpers import user_preference_sorter, maybe_json
 
 
 class Recordings(object):
@@ -19,13 +19,13 @@ class Recordings(object):
 
 class Recording(object):
     def __init__(self, json):
-        self.mime = json['mime_type']
+        self.mime = maybe_json(json, 'mime_type', 'video/mp4')
         self.type, self.format = self.mime.split('/')
-        self.hd = json['high_quality']
+        self.hd = maybe_json(json, 'high_quality', True)
         self.url = json['recording_url']
-        self.length = json['length']
-        self.size = json['size']
-        lang = json['language']
+        self.length = maybe_json(json, 'length', 0)
+        self.size = maybe_json(json, 'size', 0)
+        lang = maybe_json(json, 'language', 'unk')
         if lang:
             self.languages = lang.split('-')
         else:
