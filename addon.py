@@ -33,7 +33,7 @@ def show_dir(subdir=''):
         depth = len(subdir.split('/'))
 
     for event in sorted(data, key=operator.itemgetter('title')):
-        top, down, children = split_pathname(event['webgen_location'], depth)
+        top, down, children = split_pathname(event['slug'], depth)
 
         if top != subdir or down in subdirs:
             continue
