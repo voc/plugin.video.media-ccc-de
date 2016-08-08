@@ -8,7 +8,7 @@ python:
 sudo: false
 # command to install dependencies
 install:
-  - pip install simplejson coveralls pytest-cov pytest-travis-fold
+  - pip install --upgrade simplejson coveralls pytest pytest-cov pytest-travis-fold
 # command to run tests
 script: py.test --cov=.
 after_success:
