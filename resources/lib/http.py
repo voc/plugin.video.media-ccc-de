@@ -1,9 +1,8 @@
 import requests
 
-import xbmcgui
-
 from .stream import Streams
 from .recording import Recordings
+from . import gui
 
 BASE_URL = 'https://api.media.ccc.de/public/'
 LIVE_URL = 'https://streaming.media.ccc.de/streams/v1.json'
@@ -21,8 +20,7 @@ def fetch_data(what):
         req = requests.get(BASE_URL + what)
         return req.json()
     except requests.RequestException as e:
-        err = 'CCC-TV', 'Can\'t fetch %s: %s' % (what, e)
-        xbmcgui.Dialog().notification(err, xbmcgui.NOTIFICATION_ERROR, 15000)
+        gui.err('Can\'t fetch %s: %s' % (what, e))
         raise FetchError(e)
 
 
@@ -31,8 +29,7 @@ def count_view(event, src):
         data = {'event_id': event, 'src': src}
         requests.post(BASE_URL + 'recordings/count', data=data)
     except requests.RequestException as e:
-        err = 'CCC-TV', 'Can\'t count view: %s' % e
-        xbmcgui.Dialog().notification(err, xbmcgui.NOTIFICATION_INFO, 15000)
+        gui.info('Can\'t count view: %s' % e)
 
 
 def fetch_recordings(event):
@@ -45,6 +42,5 @@ def fetch_live():
         req = requests.get(LIVE_URL)
         return Streams(req.json())
     except requests.exceptions.RequestException as e:
-        err = 'CCC-TV', 'Can\'t fetch streams: %s' % e
-        xbmcgui.Dialog().notification(err, xbmcgui.NOTIFICATION_ERROR, 15000)
+        gui.err('Can\'t fetch streams: %s' % e)
         raise FetchError(e)
