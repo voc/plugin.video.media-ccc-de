@@ -5,3 +5,6 @@
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
 *~
+# xbmc-checkpo
+*.po.bak
+/*.log
