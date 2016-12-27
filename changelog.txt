@@ -1,6 +1,7 @@
 v0.1
 - The Oh-congress-again release
 - Migrated translations from XML to PO.
+- Add "insecure" option for devices with old/broken TLS setup (fixes #2, #12).
 
 v0.0.5
 - The everything-was-broken release
