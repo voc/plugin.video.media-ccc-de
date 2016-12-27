@@ -19,7 +19,7 @@
     <platform>all</platform>
     <license>MIT License</license>
     <website>http://media.ccc.de/</website>
-    <email>tobias-xbmc@23.gs</email>
+    <email>tobias-kodi@23.gs</email>
     <source>http://github.com/cccc/plugin.video.media-ccc-de</source>
   </extension>
 </addon>
