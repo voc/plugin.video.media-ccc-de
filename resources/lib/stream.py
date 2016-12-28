@@ -16,8 +16,9 @@ class Room(object):
     def __init__(self, json, group=''):
         self.streams = []
         for stream in json["streams"]:
-            for urlname, urldata in stream["urls"].items():
-                self.streams.append(Stream(urlname, urldata, stream))
+            if len(stream["urls"]) > 0:
+                for urlname, urldata in stream["urls"].items():
+                    self.streams.append(Stream(urlname, urldata, stream))
         self.slug = json["slug"]
         self.display = json["display"]
         if len(group) > 0:
