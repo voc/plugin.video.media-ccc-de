@@ -45,7 +45,7 @@ def show_dir(subdir=''):
         else:
             item = ListItem(event['title'])
             item.setLabel2(event['acronym'])
-            item.setThumbnailImage(event['logo_url'])
+            item.setArt({'thumb': event['logo_url']})
             url = plugin.url_for(show_conference,
                                  conf=event['url'].rsplit('/', 1)[1])
             addDirectoryItem(plugin.handle, url, item, True)
@@ -67,7 +67,7 @@ def show_conference(conf):
 
     for event in sorted(data['events'], key=operator.itemgetter('title')):
         item = ListItem(event['title'])
-        item.setThumbnailImage(event['thumb_url'])
+        item.setArt({'thumb': event['thumb_url']})
         item.setProperty('IsPlayable', 'true')
 
         info = {
