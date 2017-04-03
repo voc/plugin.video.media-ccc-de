@@ -1,5 +1,5 @@
 # XBMC Media Center language file
-# Addon Name: CCC-TV (media.ccc.de)
+# Addon Name: media.ccc.de
 # Addon id: plugin.video.media-ccc-de
 # Addon version: 0.0.5
 # Addon Provider: Tobias Gruetzmacher
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: XBMC-Addons\n"
 "Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: 2016-12-27 13:07+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-04-03 19:55+0200\n"
 "Last-Translator: Tobias Gruetzmacher <tobias-kodi@23.gs>\n"
 "Language-Team: LANGUAGE\n"
 "MIME-Version: 1.0\n"
@@ -22,12 +22,12 @@ msgid "Videos of Chaos Computer Club events."
 msgstr "Videos von Chaos Computer Club Veranstaltungen."
 
 msgctxt "Addon Description"
-msgid "This addon provides access to videos published on http://media.ccc.de/ (mostly lecture recordings of CCC events) "
-msgstr "Dieses Add-On ermöglicht den Zugriff auf Videos, die auf http://media.ccc.de/ veröffentlicht wurden (größtenteils Vortragsmitschnitte von CCC-Veranstaltungen)"
+msgid "This addon provides access to videos published on https://media.ccc.de/ (mostly lecture recordings of CCC events) "
+msgstr "Dieses Add-On ermöglicht den Zugriff auf Videos, die auf https://media.ccc.de/ veröffentlicht wurden (größtenteils Vortragsmitschnitte von CCC-Veranstaltungen)"
 
 msgctxt "#30000"
-msgid "CCC-TV"
-msgstr "CCC-TV"
+msgid "media.ccc.de"
+msgstr "media.ccc.de"
 
 msgctxt "#30100"
 msgid "Quality"

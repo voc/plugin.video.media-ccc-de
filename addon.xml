@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.media-ccc-de" name="CCC-TV (media.ccc.de)" version="0.0.5" provider-name="Tobias Gruetzmacher">
+<addon id="plugin.video.media-ccc-de" name="media.ccc.de" version="0.0.5" provider-name="Tobias Gruetzmacher">
   <requires>
     <import addon="xbmc.python" version="2.14.0"/>
     <import addon="script.module.simplejson" version="3.3.0"/>
@@ -12,14 +12,14 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Videos of Chaos Computer Club events.</summary>
     <summary lang="de">Videos von Chaos Computer Club Veranstaltungen.</summary>
-    <description lang="en">This addon provides access to videos published on http://media.ccc.de/ (mostly lecture recordings of CCC events) </description>
-    <description lang="de">Dieses Add-On ermöglicht den Zugriff auf Videos, die auf http://media.ccc.de/ veröffentlicht wurden (größtenteils Vortragsmitschnitte von CCC-Veranstaltungen)</description>
+    <description lang="en">This addon provides access to videos published on https://media.ccc.de/ (mostly lecture recordings of CCC events) </description>
+    <description lang="de">Dieses Add-On ermöglicht den Zugriff auf Videos, die auf https://media.ccc.de/ veröffentlicht wurden (größtenteils Vortragsmitschnitte von CCC-Veranstaltungen)</description>
     <disclaimer lang="en"></disclaimer>
     <language>de en</language>
     <platform>all</platform>
     <license>MIT License</license>
-    <website>http://media.ccc.de/</website>
+    <website>https://media.ccc.de/</website>
     <email>tobias-kodi@23.gs</email>
-    <source>http://github.com/cccc/plugin.video.media-ccc-de</source>
+    <source>https://github.com/cccc/plugin.video.media-ccc-de</source>
   </extension>
 </addon>
