@@ -15,25 +15,25 @@ class FetchError(Exception):
     pass
 
 
-def fetch_data(what, insecure=False):
+def fetch_data(what):
     try:
-        req = requests.get(build_url(BASE_URL + what, insecure))
+        req = requests.get(build_url(BASE_URL + what))
         return req.json()
     except requests.RequestException as e:
         gui.err('Can\'t fetch %s: %s' % (what, e))
         raise FetchError(e)
 
 
-def count_view(event, src, insecure=False):
+def count_view(event, src):
     try:
         data = {'event_id': event, 'src': src}
-        requests.post(build_url(BASE_URL + 'recordings/count', insecure), data=data)
+        requests.post(build_url(BASE_URL + 'recordings/count'), data=data)
     except requests.RequestException as e:
         gui.info('Can\'t count view: %s' % e)
 
 
-def fetch_recordings(event, insecure=False):
-    req = fetch_data('events/' + event, insecure)
+def fetch_recordings(event):
+    req = fetch_data('events/' + event)
     return Recordings(req)
 
 

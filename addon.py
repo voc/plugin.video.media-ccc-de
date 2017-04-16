@@ -57,7 +57,7 @@ def show_dir(subdir=''):
 def show_conference(conf):
     data = None
     try:
-        data = http.fetch_data('conferences/' + conf, wants_insecure())
+        data = http.fetch_data('conferences/' + conf)
     except http.FetchError:
         return
 
@@ -104,13 +104,13 @@ def resolve_event(event, quality=None, format=None):
 
     data = None
     try:
-        data = http.fetch_recordings(event, wants_insecure())
+        data = http.fetch_recordings(event)
     except http.FetchError:
         return
     want = data.recordings_sorted(quality, format)
 
     if len(want) > 0:
-        http.count_view(event, want[0].url, wants_insecure())
+        http.count_view(event, want[0].url)
         setResolvedUrl(plugin.handle, True, ListItem(path=want[0].url))
 
 
@@ -153,7 +153,7 @@ def show_live():
 
 # FIXME: @plugin.cached()
 def get_index_data():
-    return http.fetch_data('conferences', wants_insecure())['conferences']
+    return http.fetch_data('conferences')['conferences']
 
 
 def split_pathname(name, depth):

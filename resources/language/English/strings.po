@@ -1,7 +1,7 @@
-# XBMC Media Center language file
+# Kodi language file
 # Addon Name: media.ccc.de
 # Addon id: plugin.video.media-ccc-de
-# Addon version: 0.0.5
+# Addon version: 0.1
 # Addon Provider: Tobias Gruetzmacher
 msgid ""
 msgstr ""
@@ -63,5 +63,5 @@ msgstr ""
 #empty strings from id 30113 to 30119
 
 msgctxt "#30120"
-msgid "Disable TLS (insecure!)"
+msgid "Disable TLS for live streams (insecure!)"
 msgstr ""

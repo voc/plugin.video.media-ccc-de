@@ -1,4 +1,4 @@
-# XBMC Media Center language file
+# Kodi language file
 # Addon Name: media.ccc.de
 # Addon id: plugin.video.media-ccc-de
 # Addon version: 0.0.5
@@ -54,5 +54,5 @@ msgid "Prefer WEBM (libre)"
 msgstr "Bevorzuge WEBM (libre)"
 
 msgctxt "#30120"
-msgid "Disable TLS (insecure!)"
-msgstr "Deaktiviere TLS (unsicher!)"
+msgid "Disable TLS for live streams (insecure!)"
+msgstr "Deaktiviere TLS für Live-Streams (unsicher!)"
