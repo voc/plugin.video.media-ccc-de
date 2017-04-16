@@ -1,7 +1,12 @@
 v0.1
-- The Oh-congress-again release
+- EasterHegg 2017 release.
+- Use "slug" instead of obsolete "webgen_location".
+- Track coverage on Travis-CI.
+- Refactor GUI code into extra file. (also fixes #11)
 - Migrated translations from XML to PO.
 - Add "insecure" option for devices with old/broken TLS setup (fixes #2, #12).
+- Skip streams without urls.
+- Switch to streaming API v2.
 
 v0.0.5
 - The everything-was-broken release

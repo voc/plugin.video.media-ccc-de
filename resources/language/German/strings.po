@@ -1,7 +1,7 @@
 # Kodi language file
 # Addon Name: media.ccc.de
 # Addon id: plugin.video.media-ccc-de
-# Addon version: 0.0.5
+# Addon version: 0.1
 # Addon Provider: Tobias Gruetzmacher
 msgid ""
 msgstr ""
