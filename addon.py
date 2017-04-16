@@ -125,28 +125,29 @@ def show_live():
     except http.FetchError:
         return
 
-    if len(data.rooms) == 0:
+    if len(data.conferences) == 0:
         entry = ListItem('No live event currently, go watch some recordings!')
         addDirectoryItem(plugin.handle, plugin.url_for(show_dir), entry, True)
 
-    for room in data.rooms:
-        want = room.streams_sorted(quality, format)
+    for conference in data.conferences:
+        for room in conference.rooms:
+            want = room.streams_sorted(quality, format)
 
-        try:
-            first_native = next(x for x in want if x.translated is False)
-            item = ListItem(room.display)
-            item.setProperty('IsPlayable', 'true')
-            addDirectoryItem(plugin.handle, first_native.url, item, False)
-        except StopIteration:
-            pass
+            try:
+                first_native = next(x for x in want if x.translated is False)
+                item = ListItem(conference.name + ': ' + room.display)
+                item.setProperty('IsPlayable', 'true')
+                addDirectoryItem(plugin.handle, first_native.url, item, False)
+            except StopIteration:
+                pass
 
-        try:
-            first_trans = next(x for x in want if x.translated is True)
-            item = ListItem(room.display + ' (Translated)')
-            item.setProperty('IsPlayable', 'true')
-            addDirectoryItem(plugin.handle, first_trans.url, item, False)
-        except StopIteration:
-            pass
+            try:
+                first_trans = next(x for x in want if x.translated is True)
+                item = ListItem(conference.name + ': ' + room.display + ' (Translated)')
+                item.setProperty('IsPlayable', 'true')
+                addDirectoryItem(plugin.handle, first_trans.url, item, False)
+            except StopIteration:
+                pass
 
     endOfDirectory(plugin.handle)
 

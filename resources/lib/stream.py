@@ -5,11 +5,20 @@ from .helpers import user_preference_sorter
 
 class Streams(object):
     def __init__(self, json):
+        self.conferences = []
+        for conference in json:
+            self.conferences.append(Conference(conference))
+
+
+class Conference(object):
+    def __init__(self, json):
         self.rooms = []
         # Ignore groups for now
-        for group in json:
+        for group in json['groups']:
             self.rooms += [Room(elem, group['group'])
                            for elem in group['rooms']]
+        self.slug = json["slug"]
+        self.name = json["conference"]
 
 
 class Room(object):
