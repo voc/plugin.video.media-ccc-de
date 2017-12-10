@@ -7,11 +7,11 @@ python:
 sudo: false
 # command to install dependencies
 install:
-  - pip install --upgrade coveralls pytest pytest-cov pytest-travis-fold
+  - pip install --upgrade pytest pytest-cov pytest-travis-fold codecov
 # command to run tests
 script: py.test --cov=.
 after_success:
-  coveralls
+  codecov
 notifications:
   irc:
     channels:
