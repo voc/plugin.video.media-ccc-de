@@ -4,11 +4,10 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-dist: trusty
 sudo: false
 # command to install dependencies
 install:
-  - pip install --upgrade simplejson coveralls pytest pytest-cov pytest-travis-fold
+  - pip install --upgrade coveralls pytest pytest-cov pytest-travis-fold
 # command to run tests
 script: py.test --cov=.
 after_success:

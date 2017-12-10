@@ -2,7 +2,6 @@
 <addon id="plugin.video.media-ccc-de" name="media.ccc.de" version="0.1.0" provider-name="Tobias Gruetzmacher">
   <requires>
     <import addon="xbmc.python" version="2.24.0"/>
-    <import addon="script.module.simplejson" version="3.3.0"/>
     <import addon="script.module.requests" version="2.3.0"/>
     <import addon="script.module.routing" version="0.2.0"/>
   </requires>

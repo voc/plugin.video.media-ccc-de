@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-import simplejson
+import json
 
 from .recording import Recordings
 
@@ -26,7 +26,7 @@ def test_minimal_broken_json():
     assert len(preferred.languages) == 1
 
 # From https://api.media.ccc.de/public/events/2893
-SampleJson = simplejson.loads('''
+SampleJson = json.loads('''
 {
   "conference_url": "https://api.media.ccc.de/public/conferences/78",
   "date": "2015-12-29T17:15:00.000+01:00",
@@ -225,7 +225,7 @@ SampleJson = simplejson.loads('''
 }
 ''')
 
-MinimalBrokenJson = simplejson.loads('''
+MinimalBrokenJson = json.loads('''
 {
   "recordings": [
     {

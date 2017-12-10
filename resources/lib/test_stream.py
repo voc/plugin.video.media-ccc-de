@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 
-import simplejson
+import json
 
 from .stream import Streams
 
@@ -35,7 +35,7 @@ def test_streams():
     assert preferred.translated is False
 
 
-SampleJson = simplejson.loads('''
+SampleJson = json.loads('''
 [
     {
         "conference": "Easterhegg 2017",
