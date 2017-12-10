@@ -1,0 +1,11 @@
+{
+  "recordings": [
+    {
+      "recording_url": "http://cdn.media.ccc.de/congress/2015/h264-hd-web/32c3-7491-de-De-anonymizing_Programmers.mp4"
+    },
+    {
+      "recording_url": "http://cdn.media.ccc.de/congress/2015/h264-hd/32c3-7491-en-de-De-anonymizing_Programmers_hd.mp4"
+    }
+  ],
+  "title": "De-anonymizing Programmers"
+}
