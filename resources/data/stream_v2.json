@@ -191,5 +191,301 @@
                 ]
             }
         ]
+    },
+    {
+        "conference": "33C3",
+        "slug": "33c3",
+        "author": "CCC",
+        "description": "Live-Streaming vom 33C3",
+        "keywords": "33C3, Hacking, Chaos Computer Club, Video, Music, Podcast, Media, Streaming, Hacker, Hamburg, Works, For, Me, Chaos, Everywhere",
+        "schedule": "http://data.c3voc.de/33C3/everything.schedule.xml",
+        "startsAt": "2016-12-27T05:00:00+0000",
+        "endsAt": "2016-12-30T20:00:00+0000",
+        "groups": [
+            {
+                "group": "Live",
+                "rooms": [
+                    {
+                        "slug": "hall1",
+                        "schedulename": "Saal 1",
+                        "thumb": "http://streaming.media.ccc.de/streams/thumbs/s1.png",
+                        "link": "http://streaming.media.ccc.de/streams/33c3/hall1?forceopen=yess",
+                        "display": "Saal 1",
+                        "stream": "s1",
+                        "streams": [
+                            {
+                                "slug": "hd-native",
+                                "display": "Saal 1 FullHD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 3.5 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_native_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "hd-translated",
+                                "display": "Saal 1 FullHD Video (Translated1)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 3.5 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "hd-translated2",
+                                "display": "Saal 1 FullHD Video (Translated2)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 3.5 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated2_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated2_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-native",
+                                "display": "Saal 1 SD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 1 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_native_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-translated",
+                                "display": "Saal 1 SD Video (Translated1)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 1 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-translated2",
+                                "display": "Saal 1 SD Video (Translated2)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 1 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated2_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated2_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-native",
+                                "display": "Saal 1 Slides",
+                                "type": "slides",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 400 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 400 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_native_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-translated",
+                                "display": "Saal 1 Slides (Translated1)",
+                                "type": "slides",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 400 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 400 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-translated2",
+                                "display": "Saal 1 Slides (Translated2)",
+                                "type": "slides",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 400 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated2_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 400 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated2_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "Saal 1 Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-translated",
+                                "display": "Saal 1 Audio (Translated1)",
+                                "type": "audio",
+                                "isTranslated": true,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-translated2",
+                                "display": "Saal 1 Audio (Translated2)",
+                                "type": "audio",
+                                "isTranslated": true,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated2.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated2.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "dash-native",
+                                "display": "Saal 1 Dash",
+                                "type": "dash",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "dash": {
+                                        "display": "DASH, baby",
+                                        "tech": "Adaptive multi-format-multi-bitrate-Stream to rule the World!!1elf",
+                                        "url": "http://live.dus.c3voc.de/dash/hall1_s1.mpd"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]
