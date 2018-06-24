@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import operator
+import sys
 
 import routing
 from xbmcgui import ListItem
@@ -194,4 +195,4 @@ def wants_insecure():
 
 
 if __name__ == '__main__':
-    plugin.run()
+    plugin.run(argv=sys.argv)
