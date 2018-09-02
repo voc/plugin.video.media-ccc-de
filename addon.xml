@@ -26,6 +26,6 @@ v0.1.1 (2017-12-20)
     <license>MIT License</license>
     <website>https://media.ccc.de/</website>
     <email>tobias-kodi@23.gs</email>
-    <source>https://github.com/cccc/plugin.video.media-ccc-de</source>
+    <source>https://github.com/voc/plugin.video.media-ccc-de</source>
   </extension>
 </addon>
