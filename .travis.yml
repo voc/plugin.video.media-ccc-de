@@ -4,7 +4,8 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-sudo: false
+  - "3.7"
+dist: xenial
 # command to install dependencies
 install:
   - pip install pytest pytest-cov pytest-travis-fold codecov
