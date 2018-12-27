@@ -8,11 +8,11 @@ python:
 dist: xenial
 # command to install dependencies
 install:
-  - pip install pytest pytest-cov pytest-travis-fold codecov
+  - pip install tox-travis codecov
 # command to run tests
-script: py.test --cov=.
+script: tox
 after_success:
-  codecov
+  codecov --file .tox/cov-*.xml
 notifications:
   irc:
     channels:
