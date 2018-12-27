@@ -1,4 +1,5 @@
-from __future__ import print_function
+# coding: utf-8
+from __future__ import print_function, division, absolute_import
 
 
 def user_preference_sorter(prefer_quality, prefer_format):
@@ -61,6 +62,6 @@ def calc_aspect(s):
     try:
         aspect = [float(x) for x in s.split(':')]
         if len(aspect) == 2:
-            return aspect[0]/aspect[1]
+            return aspect[0] / aspect[1]
     except ValueError:
         return None

@@ -1,11 +1,13 @@
-from __future__ import print_function
+# coding: utf-8
+from __future__ import print_function, division, absolute_import
 
 import operator
 import sys
 
 import routing
 from xbmcgui import ListItem
-from xbmcplugin import addDirectoryItem, endOfDirectory, setResolvedUrl, getSetting, setContent
+from xbmcplugin import (addDirectoryItem, endOfDirectory, setResolvedUrl,
+    getSetting, setContent)
 
 import resources.lib.http as http
 from resources.lib.helpers import maybe_json, calc_aspect, json_date_to_info
@@ -147,7 +149,6 @@ def show_live():
                 item = ListItem(conference.name + ': ' + room.display + extra)
                 item.setProperty('IsPlayable', 'true')
                 addDirectoryItem(plugin.handle, stream.url, item, False)
-                hasItem = True
 
     endOfDirectory(plugin.handle)
 
@@ -164,7 +165,7 @@ def split_pathname(name, depth):
         down = path[depth]
     else:
         down = None
-    children = len(path)-1 > depth
+    children = len(path) - 1 > depth
     return (top, down, children)
 
 

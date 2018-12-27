@@ -1,4 +1,5 @@
-from __future__ import print_function
+# coding: utf-8
+from __future__ import print_function, division, absolute_import
 
 from .helpers import user_preference_sorter
 
@@ -47,7 +48,7 @@ class Stream(object):
         self.format = name
         if self.format == 'hls':
             self.format = 'mp4'
-        if stream['videoSize'] != None:
+        if stream['videoSize'] is not None:
             self.hd = stream['videoSize'][0] >= 1280
         self.url = data['url']
         self.translated = stream['isTranslated']

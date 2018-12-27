@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import print_function
+# coding: utf-8
+from __future__ import print_function, division, absolute_import
 
 from .recording import Recordings
 from .testdata import getfile
