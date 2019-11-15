@@ -30,6 +30,9 @@ def show_dir(subdir=''):
     if subdir == '':
         depth = 0
 
+        addDirectoryItem(plugin.handle, plugin.url_for(show_search),
+			 ListItem('Search'), True)
+
         addDirectoryItem(plugin.handle, plugin.url_for(show_live),
                          ListItem('Live Streaming'), True)
     else:
@@ -64,12 +67,24 @@ def show_conference(conf):
     except http.FetchError:
         return
 
+    list_events(data)
+
+def list_events(data, showConference=False):
     setContent(plugin.handle, 'movies')
-
     aspect = calc_aspect(maybe_json(data, 'aspect_ratio', '16:9'))
+    sorted_data = None
+    conf_tag = ""
 
-    for event in sorted(data['events'], key=operator.itemgetter('title')):
-        item = ListItem(event['title'])
+    if showConference:
+        sorted_data = sorted(data['events'], key=operator.itemgetter('conference_url'))
+    else:
+        sorted_data = sorted(data['events'], key=operator.itemgetter('title'))
+
+    for event in sorted_data:
+        if showConference:
+            conf_tag = "[" + event['conference_url'].rsplit('/', 1)[1] +  "] "
+        entry = "%s%s" % (conf_tag, event['title'])
+        item = ListItem(entry)
         item.setArt({'thumb': event['thumb_url']})
         item.setProperty('IsPlayable', 'true')
 
@@ -149,6 +164,33 @@ def show_live():
                 item = ListItem(conference.name + ': ' + room.display + extra)
                 item.setProperty('IsPlayable', 'true')
                 addDirectoryItem(plugin.handle, stream.url, item, False)
+
+    endOfDirectory(plugin.handle)
+
+
+@plugin.route('/search')
+def show_search():
+    quality = get_set_quality()
+    format = get_set_format()
+    term = ""
+    data = None
+
+    kb = xbmc.Keyboard('default', 'heading')
+    kb.setDefault('')
+    kb.setHeading('Search term')
+    kb.setHiddenInput(False)
+    kb.doModal()
+    if kb.isConfirmed():
+	term = kb.getText()
+    else:
+	return
+
+    try:
+        data = http.fetch_search(term)
+    except http.FetchError:
+        return
+
+    list_events(data, showConference=True)
 
     endOfDirectory(plugin.handle)
 

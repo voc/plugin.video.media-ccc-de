@@ -27,6 +27,10 @@ def fetch_data(what):
         raise FetchError(e)
 
 
+def fetch_search(what):
+    return fetch_data('events/search?q=:' + what)
+
+
 def count_view(event, src):
     try:
         data = {'event_id': event, 'src': src}
