@@ -35,6 +35,10 @@ def show_dir(subdir=''):
 
         addDirectoryItem(plugin.handle, plugin.url_for(show_live),
                          ListItem('Live Streaming'), True)
+
+        addDirectoryItem(plugin.handle, plugin.url_for(show_recent),
+			 ListItem('Recent (100)'), True)
+
     else:
         depth = len(subdir.split('/'))
 
@@ -170,8 +174,6 @@ def show_live():
 
 @plugin.route('/search')
 def show_search():
-    quality = get_set_quality()
-    format = get_set_format()
     term = ""
     data = None
 
@@ -187,6 +189,19 @@ def show_search():
 
     try:
         data = http.fetch_search(term)
+    except http.FetchError:
+        return
+
+    list_events(data, showConference=True)
+
+    endOfDirectory(plugin.handle)
+
+@plugin.route('/events/recent')
+def show_recent():
+    data = None
+
+    try:
+        data = http.fetch_data('events/recent/')
     except http.FetchError:
         return
 
