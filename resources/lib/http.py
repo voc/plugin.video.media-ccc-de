@@ -7,7 +7,7 @@ from .stream import Streams
 from .recording import Recordings
 from . import gui
 
-BASE_URL = 'api.media.ccc.de/public/'
+BASE_URL = 'media.ccc.de/public/'
 LIVE_URL = 'streaming.media.ccc.de/streams/v2.json'
 
 # BASE_URL = '127.0.0.1:3000/public/'
