@@ -52,7 +52,3 @@ msgstr "Bevorzuge MPEG (hardware-beschleunigt)"
 msgctxt "#30112"
 msgid "Prefer WEBM (libre)"
 msgstr "Bevorzuge WEBM (libre)"
-
-msgctxt "#30120"
-msgid "Disable TLS for live streams (insecure!)"
-msgstr "Deaktiviere TLS für Live-Streams (unsicher!)"

@@ -124,7 +124,7 @@ def show_live():
 
     data = None
     try:
-        data = http.fetch_live(wants_insecure())
+        data = http.fetch_live()
     except http.FetchError:
         return
 
@@ -189,10 +189,6 @@ def get_set_quality():
 
 def get_set_format():
     return FORMATS[get_setting_int('format')]
-
-
-def wants_insecure():
-    return getSetting(plugin.handle, 'insecure') == 'true'
 
 
 if __name__ == '__main__':

@@ -60,8 +60,3 @@ msgctxt "#30112"
 msgid "Prefer WEBM (libre)"
 msgstr ""
 
-#empty strings from id 30113 to 30119
-
-msgctxt "#30120"
-msgid "Disable TLS for live streams (insecure!)"
-msgstr ""
