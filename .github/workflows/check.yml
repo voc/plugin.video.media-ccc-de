@@ -1,0 +1,23 @@
+name: Kodi Addon-Check
+
+on: [push, pull_request]
+
+jobs:
+  kodi-addon-checker:
+    runs-on: ubuntu-latest
+    name: Kodi addon checker
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Validate Addon
+      uses: xbmc/action-kodi-addon-checker@v1.2
+      with:
+        kodi-version: jarvis
+        addon-id: ${{ github.event.repository.name }}
+    - name: Validate Addon for Matrix
+      uses: xbmc/action-kodi-addon-checker@v1.2
+      with:
+        kodi-version: matrix
+        rewrite-for-matrix: true
+        addon-id: ${{ github.event.repository.name }}
+
