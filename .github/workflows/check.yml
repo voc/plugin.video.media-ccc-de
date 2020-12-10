@@ -14,4 +14,10 @@ jobs:
       with:
         kodi-version: jarvis
         addon-id: ${{ github.event.repository.name }}
+    - name: Validate Addon for Matrix
+      uses: xbmc/action-kodi-addon-checker@v1.2
+      with:
+        kodi-version: matrix
+        rewrite-for-matrix: true
+        addon-id: ${{ github.event.repository.name }}
 
