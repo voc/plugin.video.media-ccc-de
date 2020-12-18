@@ -7,15 +7,12 @@ import sys
 import routing
 from xbmcgui import ListItem
 from xbmcplugin import (addDirectoryItem, endOfDirectory, setResolvedUrl,
-    getSetting, setContent)
+    setContent)
 
-import resources.lib.http as http
+from resources.lib import http, settings
 from resources.lib.helpers import maybe_json, calc_aspect, json_date_to_info
 
 plugin = routing.Plugin()
-
-QUALITY = ["sd", "hd"]
-FORMATS = ["mp4", "webm"]
 
 
 @plugin.route('/')
@@ -100,10 +97,10 @@ def show_conference(conf):
 @plugin.route('/event/<event>')
 @plugin.route('/event/<event>/<quality>/<format>')
 def resolve_event(event, quality=None, format=None):
-    if quality not in QUALITY:
-        quality = get_set_quality()
-    if format not in FORMATS:
-        format = get_set_format()
+    if quality not in settings.QUALITY:
+        quality = settings.get_quality(plugin)
+    if format not in settings.FORMATS:
+        format = settings.get_format(plugin)
 
     data = None
     try:
@@ -119,8 +116,8 @@ def resolve_event(event, quality=None, format=None):
 
 @plugin.route('/live')
 def show_live():
-    quality = get_set_quality()
-    format = get_set_format()
+    quality = settings.get_quality(plugin)
+    format = settings.get_format(plugin)
 
     data = None
     try:
@@ -174,21 +171,6 @@ def build_path(top, down):
         return down
     else:
         return '/'.join((top, down))
-
-
-def get_setting_int(name):
-    val = getSetting(plugin.handle, name)
-    if not val:
-        val = '0'
-    return int(val)
-
-
-def get_set_quality():
-    return QUALITY[get_setting_int('quality')]
-
-
-def get_set_format():
-    return FORMATS[get_setting_int('format')]
 
 
 if __name__ == '__main__':
