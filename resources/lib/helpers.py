@@ -2,9 +2,12 @@
 from __future__ import print_function, division, absolute_import
 
 
-def user_preference_sorter(prefer_quality, prefer_format):
+def user_preference_sorter(prefer_quality, prefer_format, prefer_dash=False):
     def do_sort(obj):
         prio = 0
+
+        if obj.type == 'dash':
+            prio += 50 if prefer_dash else -50
 
         if obj.format == prefer_format:
             prio += 20
