@@ -15,9 +15,11 @@ DATA = list((quality, format, quality == 'hd', dash)
 
 def test_conferences():
     s = Streams(SampleJson)
-    assert len(s.conferences) == 2
+    assert len(s.conferences) == 3
     assert s.conferences[0].slug == "eh17"
     assert s.conferences[0].name == "Easterhegg 2017"
+    assert s.conferences[2].slug == "dashconf"
+    assert s.conferences[2].name == "DASHconf"
 
 
 def test_rooms():
@@ -79,6 +81,21 @@ def test_streams_multiple_translations(quality, format, hd, prefer_dash):
     assert dash.hd is None
     assert dash.format == 'dash'
     assert dash.translated is False
+
+
+@pytest.mark.parametrize('quality,format,hd,dash', DATA)
+def test_dash_only(quality, format, hd, dash):
+    s = Streams(SampleJson)
+    c = s.conferences[2]
+    r = c.rooms[0]
+    assert len(r.streams) == 5
+    streams = r.streams_sorted(quality, format, dash)
+    assert len(streams) == 1
+    preferred = streams[0]
+    assert preferred.type == 'dash'
+    assert preferred.hd is None
+    assert preferred.format == 'dash'
+    assert preferred.translated is False
 
 
 SampleJson = getfile('stream_v2.json')
