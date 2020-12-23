@@ -9,7 +9,7 @@ from xbmcgui import ListItem
 from xbmcplugin import (addDirectoryItem, endOfDirectory, setResolvedUrl,
     setContent)
 
-from resources.lib import http, settings
+from resources.lib import http, kodi, settings
 from resources.lib.helpers import maybe_json, calc_aspect, json_date_to_info
 
 plugin = routing.Plugin()
@@ -118,6 +118,7 @@ def resolve_event(event, quality=None, format=None):
 def show_live():
     quality = settings.get_quality(plugin)
     format = settings.get_format(plugin)
+    prefer_dash = settings.prefer_dash(plugin)
 
     data = None
     try:
@@ -131,7 +132,7 @@ def show_live():
 
     for conference in data.conferences:
         for room in conference.rooms:
-            want = room.streams_sorted(quality, format)
+            want = room.streams_sorted(quality, format, prefer_dash)
 
             # Assumption: want now starts with the "best" alternative,
             # followed by an arbitrary number of translations, after which
@@ -145,7 +146,18 @@ def show_live():
                     extra = ' (Translated %i)' % id if id > 1 else ' (Translated)'
                 item = ListItem(conference.name + ': ' + room.display + extra)
                 item.setProperty('IsPlayable', 'true')
+                if stream.type == 'dash':
+                    dashproperty = 'inputstream'
+                    if kodi.major_version() < 19:
+                        dashproperty += 'addon'
+                    item.setProperty(dashproperty, 'inputstream.adaptive')
+                    item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
+
                 addDirectoryItem(plugin.handle, stream.url, item, False)
+
+                # MPEG-DASH includes all translated streams
+                if stream.type == 'dash':
+                    break
 
     endOfDirectory(plugin.handle)
 

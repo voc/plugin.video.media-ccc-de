@@ -1,16 +1,12 @@
 # Kodi language file
-# Addon Name: media.ccc.de
 # Addon id: plugin.video.media-ccc-de
-# Addon version: 0.1
 # Addon Provider: Tobias Gruetzmacher
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC-Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: 2016-12-27 13:07+0000\n"
-"PO-Revision-Date: 2017-04-03 19:55+0200\n"
+"PO-Revision-Date: 2020-12-23 12:00+0200\n"
 "Last-Translator: Tobias Gruetzmacher <tobias-kodi@23.gs>\n"
-"Language-Team: LANGUAGE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,5 +54,9 @@ msgstr ""
 
 msgctxt "#30112"
 msgid "Prefer WEBM (libre)"
+msgstr ""
+
+msgctxt "#30120"
+msgid "Prefer MPEG-DASH for live streams"
 msgstr ""
 

@@ -487,5 +487,88 @@
                 ]
             }
         ]
+    },
+    {
+        "conference": "DASHconf",
+        "slug": "dashconf",
+        "author": "Rainbow Dash",
+        "description": "Sample for DASH-only stream",
+        "keywords": "",
+        "schedule": null,
+        "startsAt": "2020-01-22T00:00:00+0000",
+        "endsAt": "2020-01-22T19:00:00+0000",
+        "isCurrentlyStreaming": true,
+        "groups": [
+            {
+                "group": "Lecture Rooms",
+                "rooms": [
+                    {
+                        "slug": "S1",
+                        "schedulename": "S1",
+                        "thumb": "https://cdn.c3voc.de/thumbnail/s1/thumb.jpeg",
+                        "link": "https://streaming.media.ccc.de/dashconf/S1",
+                        "display": "S1",
+                        "stream": "s1",
+                        "streams": [
+                            {
+                                "slug": "dash-native",
+                                "display": "S1",
+                                "type": "dash",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "dash": {
+                                        "display": "DASH, baby",
+                                        "tech": "Adaptive multi-format-multi-bitrate-Stream to rule the World!!1elf",
+                                        "url": "https://dash.akamaized.net/dash264/TestCases/10a/1/iis_forest_short_poem_multi_lang_480p_single_adapt_aaclc_sidx.mpd"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "S1 Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "https://cdn.c3voc.de/s1_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "https://cdn.c3voc.de/s1_native.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-native",
+                                "display": "S1 Slides",
+                                "type": "slides",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 400 kBit/s",
+                                        "url": "https://cdn.c3voc.de/s1_native_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 400 kBit/s",
+                                        "url": "https://cdn.c3voc.de/s1_native_slides.m3u8"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]

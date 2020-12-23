@@ -21,3 +21,8 @@ def get_quality(plugin):
 
 def get_format(plugin):
     return FORMATS[get_setting_int(plugin, 'format')]
+
+
+def prefer_dash(plugin):
+    val = getSetting(plugin.handle, 'dash')
+    return val == 'true'
