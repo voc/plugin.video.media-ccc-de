@@ -1,0 +1,6 @@
+.gitattributes export-ignore
+.github export-ignore
+.gitignore export-ignore
+resources/data export-ignore
+resources/lib/test* export-ignore
+tox.ini export-ignore
