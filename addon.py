@@ -118,6 +118,7 @@ def resolve_event(event, quality=None, format=None):
 def show_live():
     quality = settings.get_quality(plugin)
     format = settings.get_format(plugin)
+    prefer_dash = settings.prefer_dash(plugin)
 
     data = None
     try:
@@ -131,7 +132,7 @@ def show_live():
 
     for conference in data.conferences:
         for room in conference.rooms:
-            want = room.streams_sorted(quality, format)
+            want = room.streams_sorted(quality, format, prefer_dash)
 
             # Assumption: want now starts with the "best" alternative,
             # followed by an arbitrary number of translations, after which
