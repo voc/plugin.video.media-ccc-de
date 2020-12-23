@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.media-ccc-de" name="media.ccc.de" version="0.3.0" provider-name="Tobias Gruetzmacher">
+<addon id="plugin.video.media-ccc-de" name="media.ccc.de" version="0.3.0+matrix.1" provider-name="Tobias Gruetzmacher">
   <requires>
-    <import addon="xbmc.python" version="2.24.0"/>
-    <import addon="script.module.requests" version="2.15.1"/>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="script.module.requests" version="2.22.0"/>
     <import addon="script.module.routing" version="0.2.3"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="addon.py">
