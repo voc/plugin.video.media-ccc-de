@@ -19,7 +19,7 @@
 - Inital support for MPEG-DASH streams (#32)</news>
     <language>de en</language>
     <platform>all</platform>
-    <license>MIT License</license>
+    <license>MIT</license>
     <website>https://media.ccc.de/</website>
     <email>tobias-kodi@23.gs</email>
     <source>https://github.com/voc/plugin.video.media-ccc-de</source>
