@@ -3,10 +3,6 @@ from __future__ import print_function, division, absolute_import
 
 import operator
 import sys
-try:
-    from urllib.parse import urlparse
-except ImportError:
-    from urlparse import urlparse
 
 import routing
 from xbmcgui import ListItem
@@ -63,9 +59,7 @@ def show_conference(conf):
     relive = None
     try:
         data = http.fetch_data('conferences/' + conf)
-
-        relive = list(filter(lambda x: x.project == conf, http.fetch_relive().recordings))
-        relive = relive[0] if len(relive) == 1 else None
+        relive = http.fetch_relive_index().by_conference(conf)
     except http.FetchError:
         return
 
@@ -112,34 +106,29 @@ def show_conference(conf):
 def show_relive(conf):
     data = None
     try:
-        relive = list(filter(lambda x: x.project == conf, http.fetch_relive().recordings))
-        relive = relive[0] if len(relive) == 1 else None
-        url = urlparse(relive.index_url, 'https').geturl()
-        data = http.fetch_relive_recordings(url)
+        relive = http.fetch_relive_index().by_conference(conf)
+        data = http.fetch_relive_recordings(relive.get_url())
     except http.FetchError:
         return
 
     setContent(plugin.handle, 'movies')
 
-    data = filter(lambda rec: rec.mp4 != '', data)
+    data = data.unreleased()
 
-    for recording in data:  # sorted(data, key=lambda x: x.title):
+    for recording in data:
         item = ListItem(recording.title)
-        item.setArt({'thumb':  urlparse(recording.thumbnail, 'https').geturl()})
+        item.setArt({'thumb':  recording.get_thumb_url()})
         item.setProperty('IsPlayable', 'true')
 
-        info = {
+        item.setInfo('video', {
             'plot': recording.room,
-        }
-        item.setInfo('video', info)
+        })
 
-        stream_info = {
+        item.addStreamInfo('video', {
             'duration': recording.duration
-        }
-        item.addStreamInfo('video', stream_info)
+        })
 
-        video_url = urlparse(recording.mp4, 'https').geturl()
-        addDirectoryItem(plugin.handle, video_url, item, False)
+        addDirectoryItem(plugin.handle, recording.get_video_url(), item, False)
 
     endOfDirectory(plugin.handle)
 

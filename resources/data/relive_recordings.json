@@ -1,0 +1,93 @@
+[
+   {
+      "duration" : 4199,
+      "guid" : "1371c7fe-98c8-5b18-a58f-d28094b7658f",
+      "id" : "137179",
+      "mtime" : 1609200725,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/137179/index.m3u8",
+      "release_url" : "https://media.ccc.de/v/rc3-137179-govdata_meets_civictech_initiativen_der_kommunalen_daseinsvorsorge_an_dritten_orten",
+      "room" : "ChaosZone TV Stream",
+      "start" : 1609099200,
+      "status" : "released",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/137179/thumb.jpg",
+      "title" : "GovData meets CivicTech – Initiativen der Kommunalen Daseinsvorsorge an Dritten Orten"
+   },
+   {
+      "duration" : 5398,
+      "guid" : "19a6e064-8ef0-433c-8d0b-ca363297b467",
+      "id" : "11575",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/11575/muxed.mp4",
+      "mtime" : 1609278966,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/11575/index.m3u8",
+      "room" : "rC2",
+      "start" : 1609274400,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/11575/thumb.jpg",
+      "title" : "OPENCOIL – A Roaming Speedshow"
+   },
+   {
+      "duration" : 5392,
+      "guid" : "b0463d1d-c4ab-5a9e-b788-ffe0c28e2e6e",
+      "id" : "46314",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/46314/muxed.mp4",
+      "mtime" : 1609107412,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/46314/index.m3u8",
+      "room" : "Wikipaka",
+      "start" : 1609102800,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/46314/thumb.jpg",
+      "title" : "The Open Show - Große Premiere!"
+   },
+   {
+      "duration" : 4192,
+      "guid" : "88faa2f9-10f6-4236-a65d-37eb215c5e8b",
+      "id" : "11374",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/11374/muxed.mp4",
+      "mtime" : 1609254365,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/11374/index.m3u8",
+      "room" : "chaosstudio-hamburg",
+      "start" : 1609251000,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/11374/thumb.jpg",
+      "title" : "Organizational Psychology and Software Teams"
+   },
+   {
+      "duration" : 4202,
+      "guid" : "b4f287e6-8b13-561f-9659-4fd1e21a4cce",
+      "id" : "428768",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/428768/muxed.mp4",
+      "mtime" : 1609084566,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/428768/index.m3u8",
+      "room" : "Wikipaka",
+      "start" : 1609081200,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/428768/thumb.jpg",
+      "title" : "Wir wissen, was ihr letzten Sommer gesagt habt! - Open Discourse und die Transparenz des Bundestages"
+   },
+   {
+      "duration" : 12524,
+      "guid" : "fc3beffd-b3f3-5f1b-8c4a-5a5305dd6ed3",
+      "id" : "333518",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/333518/muxed.mp4",
+      "mtime" : 1609122908,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/333518/index.m3u8",
+      "room" : "franconian.net",
+      "start" : 1609111200,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/333518/thumb.jpg",
+      "title" : "Schallweller"
+   },
+   {
+      "duration" : 6588,
+      "guid" : "9903c6df-974b-5d79-8858-42fd844dd0f3",
+      "id" : "990369",
+      "mtime" : 1609169767,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/990369/index.m3u8",
+      "release_url" : "https://media.ccc.de/v/rc3-990369-hackergenossenschaft_als_plattform_chaosnahen_wirtschaftens",
+      "room" : "Chaos-West TV",
+      "start" : 1609164000,
+      "status" : "released",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/990369/thumb.jpg",
+      "title" : "Hackergenossenschaft als Plattform chaosnahen Wirtschaftens"
+   }
+]
