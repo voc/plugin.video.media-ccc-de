@@ -144,7 +144,8 @@ def show_live():
                 extra = ''
                 if stream.translated:
                     extra = ' (Translated %i)' % id if id > 1 else ' (Translated)'
-                item = ListItem(conference.name + ': ' + room.display + extra)
+                talk_title = ' >> ' + room.current_talk_title if room.current_talk_title != '' else ''
+                item = ListItem(conference.name + ': ' + room.display + talk_title + extra)
                 item.setProperty('IsPlayable', 'true')
                 if stream.type == 'dash':
                     dashproperty = 'inputstream'
