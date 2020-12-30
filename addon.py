@@ -3,6 +3,10 @@ from __future__ import print_function, division, absolute_import
 
 import operator
 import sys
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 import routing
 from xbmcgui import ListItem
@@ -56,8 +60,12 @@ def show_dir(subdir=''):
 @plugin.route('/conference/<conf>')
 def show_conference(conf):
     data = None
+    relive = None
     try:
         data = http.fetch_data('conferences/' + conf)
+
+        relive = list(filter(lambda x: x.project == conf, http.fetch_relive().recordings))
+        relive = relive[0] if len(relive) == 1 else None
     except http.FetchError:
         return
 
@@ -91,6 +99,48 @@ def show_conference(conf):
         url = plugin.url_for(resolve_event,
                              event=event['url'].rsplit('/', 1)[1])
         addDirectoryItem(plugin.handle, url, item, False)
+
+    if relive is not None:
+        relive_item = ListItem('ReLive (unreleased)')
+        url = plugin.url_for(show_relive, conf=conf)
+        addDirectoryItem(plugin.handle, url, relive_item, True)
+
+    endOfDirectory(plugin.handle)
+
+
+@plugin.route('/relive/<conf>')
+def show_relive(conf):
+    data = None
+    try:
+        relive = list(filter(lambda x: x.project == conf, http.fetch_relive().recordings))
+        relive = relive[0] if len(relive) == 1 else None
+        url = urlparse(relive.index_url, 'https').geturl()
+        data = http.fetch_relive_recordings(url)
+    except http.FetchError:
+        return
+
+    setContent(plugin.handle, 'movies')
+
+    data = filter(lambda rec: rec.mp4 != '', data)
+
+    for recording in data:  # sorted(data, key=lambda x: x.title):
+        item = ListItem(recording.title)
+        item.setArt({'thumb':  urlparse(recording.thumbnail, 'https').geturl()})
+        item.setProperty('IsPlayable', 'true')
+
+        info = {
+            'plot': recording.room,
+        }
+        item.setInfo('video', info)
+
+        stream_info = {
+            'duration': recording.duration
+        }
+        item.addStreamInfo('video', stream_info)
+
+        video_url = urlparse(recording.mp4, 'https').geturl()
+        addDirectoryItem(plugin.handle, video_url, item, False)
+
     endOfDirectory(plugin.handle)
 
 

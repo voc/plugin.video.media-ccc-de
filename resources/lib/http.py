@@ -5,10 +5,12 @@ import requests
 
 from .stream import Streams
 from .recording import Recordings
+from .relive import Relives, ReliveRecording
 from . import gui
 
 BASE_URL = 'https://media.ccc.de/public/'
 LIVE_URL = 'https://streaming.media.ccc.de/streams/v2.json'
+RELIVE_URL = 'http://relive.c3voc.de/relive/index.json'
 
 # BASE_URL = 'http://127.0.0.1:3000/public/'
 # LIVE_URL = 'http://127.0.0.1:3000/stream_v2.json'
@@ -46,4 +48,22 @@ def fetch_live():
         return Streams(req.json())
     except requests.exceptions.RequestException as e:
         gui.err('Can\'t fetch streams: %s' % e)
+        raise FetchError(e)
+
+
+def fetch_relive():
+    try:
+        req = requests.get(RELIVE_URL)
+        return Relives(req.json())
+    except requests.exceptions.RequestException as e:
+        gui.err('Can\'t fetch relive index: %s' % e)
+        raise FetchError(e)
+
+
+def fetch_relive_recordings(url):
+    try:
+        req = requests.get(url)
+        return [ReliveRecording(el) for el in req.json()]
+    except requests.exceptions.RequestException as e:
+        gui.err('Can\'t fetch relive recordings: %s' % e)
         raise FetchError(e)
