@@ -25,10 +25,10 @@ def test_index_by_conf():
 
 def test_recordings():
     all = ReliveRecordings(sample_recording)
-    assert len(all.recordings) == 7
+    assert len(all.recordings) == 3
 
     unreleased = ReliveRecordings(sample_recording).unreleased()
-    assert len(unreleased) == 5
+    assert len(unreleased) == 2
 
     assert unreleased[0].mp4 == "//cdn.c3voc.de/relive/rc3/11575/muxed.mp4"
     assert unreleased[0].get_video_url() == "https://cdn.c3voc.de/relive/rc3/11575/muxed.mp4"

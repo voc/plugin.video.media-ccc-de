@@ -59,9 +59,13 @@ def show_conference(conf):
     relive = None
     try:
         data = http.fetch_data('conferences/' + conf)
-        relive = http.fetch_relive_index().by_conference(conf)
     except http.FetchError:
         return
+
+    try:
+        relive = http.fetch_relive_index().by_conference(conf)
+    except http.FetchError:
+        pass # gui error shown by http class
 
     setContent(plugin.handle, 'movies')
 

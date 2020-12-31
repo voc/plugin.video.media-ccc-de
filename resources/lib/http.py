@@ -10,7 +10,7 @@ from . import gui
 
 BASE_URL = 'https://media.ccc.de/public/'
 LIVE_URL = 'https://streaming.media.ccc.de/streams/v2.json'
-RELIVE_URL = 'http://relive.c3voc.de/relive/index.json'
+RELIVE_URL = 'https://cdn.c3voc.de/relive/index.json'
 
 # BASE_URL = 'http://127.0.0.1:3000/public/'
 # LIVE_URL = 'http://127.0.0.1:3000/stream_v2.json'

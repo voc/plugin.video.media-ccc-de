@@ -22,9 +22,7 @@ class Relives(object):
 class ReliveItem(object):
     def __init__(self, json):
         self.index_url = json['index_url']
-        # self.media_conference_id = json['media_conference_id']
         self.project = json['project']
-        self.updated_at = json['updated_at']
 
     def get_url(self):
         return urlparse(self.index_url, 'https').geturl()
@@ -40,17 +38,9 @@ class ReliveRecordings(object):
 
 class ReliveRecording(object):
     def __init__(self, json):
-        self.duration = json['duration']
-        self.guid = json['guid']
-        self.id = json['id']
-        self.mtime = json['mtime']
-        self.playlist = json['playlist']
-        self.release_url = maybe_json(json, 'release_url', '')
+        self.duration = maybe_json(json, 'duration', 0)
         self.mp4 = maybe_json(json, 'mp4', '')
-        self.room = json['room']
-        self.start = json['start']
-        self.status = json['status']
-        self.thumbnail = json['thumbnail']
+        self.thumbnail = maybe_json(json, 'thumbnail', '')
         self.title = json['title']
 
     def get_video_url(self):
