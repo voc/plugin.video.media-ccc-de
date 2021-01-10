@@ -41,6 +41,7 @@ class ReliveRecording(object):
         self.duration = maybe_json(json, 'duration', 0)
         self.mp4 = maybe_json(json, 'mp4', '')
         self.thumbnail = maybe_json(json, 'thumbnail', '')
+        self.room = maybe_json(json, 'room', '')
         self.title = json['title']
 
     def get_video_url(self):

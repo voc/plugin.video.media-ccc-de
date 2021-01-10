@@ -7,7 +7,7 @@ from .testdata import getfile
 
 def test_index():
     r = Relives(sample_index)
-    assert len(r.recordings) == 15
+    assert len(r.recordings) == 2
     assert r.recordings[0].project == "wevsclimatecrisis"
     assert r.recordings[0].index_url == "//cdn.c3voc.de/relive/wevsclimatecrisis/index.json"
     assert r.recordings[1].project == "rc3"
@@ -34,6 +34,7 @@ def test_recordings():
     assert unreleased[0].get_video_url() == "https://cdn.c3voc.de/relive/rc3/11575/muxed.mp4"
     assert unreleased[0].thumbnail == "//cdn.c3voc.de/relive/rc3/11575/thumb.jpg"
     assert unreleased[0].get_thumb_url() == "https://cdn.c3voc.de/relive/rc3/11575/thumb.jpg"
+    assert unreleased[0].room == "rC2"
 
 
 sample_index = getfile('relive_index.json')
