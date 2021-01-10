@@ -1,0 +1,41 @@
+[
+   {
+      "duration" : 4199,
+      "guid" : "1371c7fe-98c8-5b18-a58f-d28094b7658f",
+      "id" : "137179",
+      "mtime" : 1609200725,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/137179/index.m3u8",
+      "release_url" : "https://media.ccc.de/v/rc3-137179-govdata_meets_civictech_initiativen_der_kommunalen_daseinsvorsorge_an_dritten_orten",
+      "room" : "ChaosZone TV Stream",
+      "start" : 1609099200,
+      "status" : "released",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/137179/thumb.jpg",
+      "title" : "GovData meets CivicTech – Initiativen der Kommunalen Daseinsvorsorge an Dritten Orten"
+   },
+   {
+      "duration" : 5398,
+      "guid" : "19a6e064-8ef0-433c-8d0b-ca363297b467",
+      "id" : "11575",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/11575/muxed.mp4",
+      "mtime" : 1609278966,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/11575/index.m3u8",
+      "room" : "rC2",
+      "start" : 1609274400,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/11575/thumb.jpg",
+      "title" : "OPENCOIL – A Roaming Speedshow"
+   },
+   {
+      "duration" : 5392,
+      "guid" : "b0463d1d-c4ab-5a9e-b788-ffe0c28e2e6e",
+      "id" : "46314",
+      "mp4" : "//cdn.c3voc.de/relive/rc3/46314/muxed.mp4",
+      "mtime" : 1609107412,
+      "playlist" : "//cdn.c3voc.de/relive/rc3/46314/index.m3u8",
+      "room" : "Wikipaka",
+      "start" : 1609102800,
+      "status" : "recorded",
+      "thumbnail" : "//cdn.c3voc.de/relive/rc3/46314/thumb.jpg",
+      "title" : "The Open Show - Große Premiere!"
+   }
+]
