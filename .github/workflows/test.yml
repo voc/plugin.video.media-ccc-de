@@ -10,7 +10,6 @@ jobs:
       max-parallel: 5
       matrix:
         python-version:
-          - pypy2.7
           - 3.8
           - 3.9
           - '3.10'
@@ -32,4 +31,3 @@ jobs:
       - uses: codecov/codecov-action@v3
         with:
           file: .tox/coverage.xml
-
