@@ -12,5 +12,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Validate Addon
         uses: xbmc/action-kodi-addon-checker@v1.2
+        with:
           kodi-version: matrix
           addon-id: ${{ github.event.repository.name }}
