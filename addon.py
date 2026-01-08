@@ -154,7 +154,7 @@ def resolve_event(event, quality=None, format=None):
 
     if len(want) > 0:
         http.count_view(event, want[0].url)
-        setResolvedUrl(plugin.handle, True, ListItem(path=want[0].url))
+        setResolvedUrl(plugin.handle, True, ListItem(path=want[0].url, offscreen=True))
 
 
 @plugin.route('/live')
