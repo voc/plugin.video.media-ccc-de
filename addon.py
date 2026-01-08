@@ -197,7 +197,8 @@ def show_live():
                     if kodi.major_version() < 19:
                         dashproperty += 'addon'
                     item.setProperty(dashproperty, 'inputstream.adaptive')
-                    item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
+                    if kodi.major_version() < 22:
+                        item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
 
                 addDirectoryItem(plugin.handle, stream.url, item, False)
 
