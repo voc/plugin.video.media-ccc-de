@@ -5,9 +5,10 @@ import operator
 import sys
 
 import routing
+import xbmcplugin
 from xbmcgui import ListItem
-from xbmcplugin import (addDirectoryItem, endOfDirectory, setResolvedUrl,
-    setContent)
+from xbmcplugin import (addDirectoryItem, addSortMethod, endOfDirectory,
+    setResolvedUrl, setContent)
 
 from resources.lib import http, kodi, settings
 from resources.lib.helpers import maybe_json, calc_aspect, json_date_to_info
@@ -46,10 +47,22 @@ def show_dir(subdir=''):
             item = ListItem(event['title'])
             item.setLabel2(event['acronym'])
             item.setArt({'thumb': event['logo_url']})
-            url = plugin.url_for(show_conference,
-                                 conf=event['url'].rsplit('/', 1)[1])
+
+            info = {
+                'plot': maybe_json(event, 'description', ''),
+            }
+
+            last_released = maybe_json(event, 'event_last_released_at', '')
+            if last_released:
+                json_date_to_info(event, 'event_last_released_at', info)
+
+            item.setInfo('video', info)
+
+            url = plugin.url_for(show_conference, conf=event['url'].rsplit('/', 1)[1])
             addDirectoryItem(plugin.handle, url, item, True)
 
+    addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_DATE)
+    addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
     endOfDirectory(plugin.handle)
 
 
@@ -72,8 +85,18 @@ def show_conference(conf):
     aspect = calc_aspect(maybe_json(data, 'aspect_ratio', '16:9'))
 
     for event in sorted(data['events'], key=operator.itemgetter('title')):
-        item = ListItem(event['title'])
-        item.setArt({'thumb': event['thumb_url']})
+        # Add promoted indicator to title
+        title = event['title']
+        if maybe_json(event, 'promoted', False):
+            title = '★ ' + title
+
+        item = ListItem(title)
+        item.setArt(
+            {
+                'thumb': event['thumb_url'],
+                'poster': maybe_json(event, 'poster_url', ''),
+            }
+        )
         item.setProperty('IsPlayable', 'true')
 
         info = {
@@ -81,9 +104,16 @@ def show_conference(conf):
             'credits': ", ".join(maybe_json(event, 'persons', [])),
             'genre': " / ".join(maybe_json(event, 'tags', [])),
             'plot': maybe_json(event, 'description', ''),
-            'tagline': maybe_json(event, 'subtitle', '')
+            'tagline': maybe_json(event, 'subtitle', ''),
+            'playcount': maybe_json(event, 'view_count', 0),
+            'duration': maybe_json(event, 'length', 0),
+            'dateadded': maybe_json(event, 'date', ''),
+            'mediatype': 'video',
         }
         json_date_to_info(event, 'date', info)
+        if maybe_json(event, 'release_date', ''):
+            json_date_to_info(event, 'release_date', info)
+            info['premiered'] = maybe_json(event, 'date', '')
         item.setInfo('video', info)
 
         streamInfo = {}
@@ -103,6 +133,10 @@ def show_conference(conf):
         url = plugin.url_for(show_relive, conf=conf)
         addDirectoryItem(plugin.handle, url, relive_item, True)
 
+    addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
+    addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_PLAYCOUNT)
+    addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_DATE)
+    addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_VIDEO_RUNTIME)
     endOfDirectory(plugin.handle)
 
 
