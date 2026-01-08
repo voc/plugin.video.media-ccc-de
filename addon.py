@@ -191,6 +191,8 @@ def show_live():
                 item = ListItem(conference.name + ': ' + room.display + talk_title + extra)
                 item.setProperty('IsPlayable', 'true')
                 if stream.type == 'dash':
+                    item.setMimeType('application/dash+xml')
+                    item.setContentLookup(False)
                     dashproperty = 'inputstream'
                     if kodi.major_version() < 19:
                         dashproperty += 'addon'
