@@ -193,10 +193,7 @@ def show_live():
                 if stream.type == 'dash':
                     item.setMimeType('application/dash+xml')
                     item.setContentLookup(False)
-                    dashproperty = 'inputstream'
-                    if kodi.major_version() < 19:
-                        dashproperty += 'addon'
-                    item.setProperty(dashproperty, 'inputstream.adaptive')
+                    item.setProperty('inputstream', 'inputstream.adaptive')
                     if kodi.major_version() < 22:
                         item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
 
