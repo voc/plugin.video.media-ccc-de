@@ -52,9 +52,7 @@ def show_dir(subdir=''):
                 'plot': maybe_json(event, 'description', ''),
             }
 
-            last_released = maybe_json(event, 'event_last_released_at', '')
-            if last_released:
-                json_date_to_info(event, 'event_last_released_at', info)
+            json_date_to_info(event, 'event_last_released_at', info)
 
             item.setInfo('video', info)
 
