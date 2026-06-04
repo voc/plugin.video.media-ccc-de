@@ -8,7 +8,4 @@ This is the official Kodi plugin to browse content on media.ccc.de and watch
 live streams from streaming.media.ccc.de.
 
 The latest version should be available through Kodi's official plugin
-repository:
-
-- For Matrix (Kodi 19.x) and newer: https://kodi.tv/addons/matrix/plugin.video.media-ccc-de
-- For Leia (Kodi 18.x) and older: https://kodi.tv/addons/leia/plugin.video.media-ccc-de
+repository: https://kodi.tv/addons/omega/plugin.video.media-ccc-de/
