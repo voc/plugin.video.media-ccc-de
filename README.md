@@ -2,6 +2,8 @@ media.ccc.de for Kodi
 =====================
 
 ![Tests](https://github.com/voc/plugin.video.media-ccc-de/workflows/Tests/badge.svg)
+[![Coverage](https://raw.githubusercontent.com/voc/plugin.video.media-ccc-de/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/voc/plugin.video.media-ccc-de/blob/python-coverage-comment-action-data/htmlcov/index.html)
+
 [![codecov](https://codecov.io/gh/voc/plugin.video.media-ccc-de/branch/main/graph/badge.svg)](https://codecov.io/gh/voc/plugin.video.media-ccc-de)
 
 This is the official Kodi plugin to browse content on media.ccc.de and watch
