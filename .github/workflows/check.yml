@@ -14,9 +14,10 @@ jobs:
           path: ${{ github.event.repository.name }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v8.2.0
         with:
-          enable-cache: true
+          python-version: '3.12'  # Compatible version for the addon checker
+          cache-dependency-glob: addon.xml
 
       - name: Run Addon checker
         run: uvx kodi-addon-checker --branch matrix ${{ github.event.repository.name }}
